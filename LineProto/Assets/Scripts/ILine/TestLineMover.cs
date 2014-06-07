@@ -12,6 +12,7 @@ public class TestLineMover : MonoBehaviour {
 	private float myCount = 0.0f;
 	private float myMoveCount = 0.0f;
 	private float mySineOffset = 0.0f;
+	private float myWiggleOffset = 0.0f;
 	public Vector3 rot = new Vector3(0.0f, 1.0f, 0.0f);
 	// Use this for initialization
 	void Start () {
@@ -32,6 +33,8 @@ public class TestLineMover : MonoBehaviour {
 			renderer.sharedMaterial.SetFloat("_SineOffset", mySineOffset);
 			renderer.sharedMaterial.SetFloat("_SineHMagnitude", HMagnitude);
 			renderer.sharedMaterial.SetFloat("_SineVMagnitude", VMagnitude);
+
+			myWiggleOffset += 1.0f * Time.deltaTime;
 			mySineOffset += SineOffsetVel;
 		}
 		//this.transform.Rotate (rot);
