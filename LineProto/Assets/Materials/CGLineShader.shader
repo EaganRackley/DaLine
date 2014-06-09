@@ -45,7 +45,7 @@
          	// of the vertex in world space, and the texture coordinates stored in the vertex.
          	struct VERTEX_IN
 			{
-		    	float4 vertexPosition : POSITION;
+		    	float4 vertexPosition : SV_POSITION;
 		    	float2 vtx_texcoord0 : TEXCOORD0;
 			};
 
@@ -74,8 +74,12 @@
          	float4 frag(FRAGMENT_IN input) : COLOR
          	{
          		float sinYComparison = sin(_SineOffset + input.worldPosition.x / _SineHMagnitude) * _SineVMagnitude + _LinePoint.y;
+         		float distance = abs(input.worldPosition.y - sinYComparison);
+         		
+         		float maxEffectDistance = 0.01;
          	
          		float4 textureColor;
+         	
          		if( input.worldPosition.y > sinYComparison )
             	{
             		textureColor = tex2D(_MainTex, _MainTex_ST.xy * input.textureCoordinates.xy + _MainTex_ST.zw);
@@ -89,10 +93,14 @@
                	{
                		discard;
                	}
-               	else
-               	{	
-               		return float4(textureColor.rgb * (_Color * textureColor.a + (1. - textureColor.a)), 1);
-               	}         		
+               	
+               	if( distance <= 0.02 )
+         		{
+         			textureColor = lerp(textureColor, _Color, 1.0 - (distance * 100.0 / 2.0));
+         		}
+               		
+               	return float4(textureColor.rgb * (_Color * textureColor.a + (1. - textureColor.a)), 1);
+               	         		
          	}// end frag
  
          	ENDCG // here ends the part in Cg 

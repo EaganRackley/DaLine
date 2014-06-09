@@ -9,10 +9,10 @@ public class TestLineMover : MonoBehaviour {
 	public float VMagnitude = 1.0f;
 	public float SineOffsetVel = 0.05f;
 	public bool ChangePosition = true;
+	public bool ChangeShader = false;
 	private float myCount = 0.0f;
 	private float myMoveCount = 0.0f;
 	private float mySineOffset = 0.0f;
-	private float myWiggleOffset = 0.0f;
 	public Vector3 rot = new Vector3(0.0f, 1.0f, 0.0f);
 	// Use this for initialization
 	void Start () {
@@ -23,18 +23,19 @@ public class TestLineMover : MonoBehaviour {
 	void Update () {
 		myCount+=0.01f;
 		myMoveCount += MoveVelocity;
-		//ShaderPoint.y = Mathf.Sin (myCount) * 1.0f;
+		ShaderPoint.y = Mathf.Sin (myCount) * 1.0f;
 		if (ChangePosition) 
 		{
 			Vector3 pos = this.transform.position;
 			pos.y = Mathf.Cos (myMoveCount) * 10.0f;
 			this.transform.position = pos;
+		}
+		if (ChangeShader) 
+		{
 			renderer.sharedMaterial.SetVector("_LinePoint", ShaderPoint);
 			renderer.sharedMaterial.SetFloat("_SineOffset", mySineOffset);
 			renderer.sharedMaterial.SetFloat("_SineHMagnitude", HMagnitude);
 			renderer.sharedMaterial.SetFloat("_SineVMagnitude", VMagnitude);
-
-			myWiggleOffset += 1.0f * Time.deltaTime;
 			mySineOffset += SineOffsetVel;
 		}
 		//this.transform.Rotate (rot);
