@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TestLineMover : MonoBehaviour {
 
-	Vector4 ShaderPoint = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+	Vector4 ShaderPoint = new Vector4(1.0f, -0.5f, 0.0f, 1.0f);
 	public float MoveVelocity = 0.02f;
 	public float HMagnitude = 1.0f;
 	public float VMagnitude = 1.0f;
@@ -23,7 +23,7 @@ public class TestLineMover : MonoBehaviour {
 	void Update () {
 		myCount+=0.01f;
 		myMoveCount += MoveVelocity;
-		ShaderPoint.y = Mathf.Sin (myCount) * 10.0f;
+		//ShaderPoint.y = Mathf.Sin (myCount) * 1.0f;
 		if (ChangePosition) 
 		{
 			Vector3 pos = this.transform.position;

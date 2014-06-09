@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\ILine\Zone.cs" />
      <Compile Include="Assets\Scripts\LineMove.cs" />
      <Compile Include="Assets\Scripts\ToggleLight.cs" />
+     <None Include="Assets\Materials\CGLineShader.shader" />
      <None Include="Assets\Materials\GLSLLineShader.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
